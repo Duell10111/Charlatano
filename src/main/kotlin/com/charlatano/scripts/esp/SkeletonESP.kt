@@ -28,6 +28,7 @@ import com.charlatano.game.me
 import com.charlatano.game.offsets.EngineOffsets.pStudioModel
 import com.charlatano.game.worldToScreen
 import com.charlatano.overlay.CharlatanoOverlay
+import com.charlatano.settings.SHOW_BEHIND_WALL
 import com.charlatano.settings.SKELETON_ESP
 import com.charlatano.utils.Vector
 import com.charlatano.utils.collections.CacheableList
@@ -44,7 +45,7 @@ internal fun skeletonEsp() {
 		
 		forEntities(ccsPlayer) {
 			val entity = it.entity
-			if (entity > 0 && entity != me && !entity.dead() && !entity.dormant()) {
+			if (entity > 0 && entity != me && !entity.dead() && !entity.dormant() && (SHOW_BEHIND_WALL || entity.spotted())) {
 				(entityBones.get(entity) ?: CacheableList<Pair<Int, Int>>(20)).apply {
 					if (isEmpty()) {
 						//val entityModel = entity.model() //no longer needed since we bypass the findStudioModel call for updated pointer method

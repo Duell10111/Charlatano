@@ -102,6 +102,10 @@ SHOW_WEAPONS = false
  */
 SHOW_GRENADES = false
 
+/**
+ * Show players behind walls
+ */
+SHOW_BEHIND_WALL = false
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -27,6 +27,7 @@ import com.charlatano.game.me
 import com.charlatano.game.worldToScreen
 import com.charlatano.overlay.CharlatanoOverlay
 import com.charlatano.settings.BOX_ESP
+import com.charlatano.settings.SHOW_BEHIND_WALL
 import com.charlatano.utils.Vector
 
 private val vHead = Vector()
@@ -44,7 +45,7 @@ internal fun boxEsp() = CharlatanoOverlay {
 	
 	forEntities(ccsPlayer) {
 		val entity = it.entity
-		if (entity == me || entity.dead() || entity.dormant()) return@forEntities false
+		if (entity == me || entity.dead() || entity.dormant() || (!SHOW_BEHIND_WALL && !entity.spotted())) return@forEntities false
 		
 		vHead.set(entity.bone(0xC), entity.bone(0x1C), entity.bone(0x2C) + 9)
 		vFeet.set(vHead.x, vHead.y, vHead.z - 75)
