@@ -63,6 +63,4 @@ object NetVarOffsets {
 	val SurvivalGameRuleDecisionTypes by netVar("DT_CSGameRulesProxy")
 
 	val m_hViewModel by netVar("DT_BasePlayer", "m_hViewModel[0]")
-
-	val m_
 }
