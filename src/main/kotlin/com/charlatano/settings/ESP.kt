@@ -47,6 +47,18 @@ var GLOW_ESP = true
 var RADAR = false
 
 /**
+ * Radar Trigger Enable
+ */
+
+var RADAR_TRIGGER_KEY_ENABLE = false
+
+/**
+ * Radar Trigger Key
+ */
+
+var RADAR_TRIGGER_KEY = 0x56
+
+/**
  * This gets rid of glow ESP "flicker", and more importantly reduces CPU usage.
  */
 var FLICKER_FREE_GLOW = true

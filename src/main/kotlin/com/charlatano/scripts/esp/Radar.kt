@@ -27,10 +27,13 @@ import com.charlatano.game.forEntities
 import com.charlatano.game.netvars.NetVarOffsets.bSpotted
 import com.charlatano.game.offsets.ClientOffsets.bDormant
 import com.charlatano.settings.RADAR
+import com.charlatano.settings.RADAR_TRIGGER_KEY
+import com.charlatano.settings.RADAR_TRIGGER_KEY_ENABLE
 import com.charlatano.utils.every
+import org.jire.arrowhead.keyPressed
 
 internal fun radar() = every(1) {
-	if (!RADAR) return@every
+	if (!RADAR && !(RADAR_TRIGGER_KEY_ENABLE && keyPressed(RADAR_TRIGGER_KEY))) return@every
 	
 	forEntities(ccsPlayer) {
 		val entity = it.entity

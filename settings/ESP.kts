@@ -46,6 +46,18 @@ GLOW_ESP = true
 RADAR = false
 
 /**
+ * Radar Trigger Enable
+ */
+
+RADAR_TRIGGER_KEY_ENABLE = false
+
+/**
+ * Radar Trigger Key
+ */
+
+RADAR_TRIGGER_KEY = 86
+
+/**
  * This gets rid of glow ESP "flicker", and more importantly reduces CPU usage.
  */
 FLICKER_FREE_GLOW = true
