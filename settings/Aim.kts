@@ -132,3 +132,17 @@ SHIFT_TO_SHOULDER_SHOTS = 4
  * The amount of sprayed shots until the aimbot shifts to aiming at the [BODY_BONE].
  */
 SHIFT_TO_BODY_SHOTS = 7
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+//                                   --- Sniper Aimer ---                                    //
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Second Force Aim Button
+ */
+SCD_AIM_KEY = 6
+
+/**
+ * Second Aimbot Boneid
+ */
+SCD_AIM_BONE = 6

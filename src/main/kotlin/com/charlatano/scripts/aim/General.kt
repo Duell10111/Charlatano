@@ -102,7 +102,8 @@ internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boo
 	
 	val aim = ACTIVATE_FROM_FIRE_KEY && keyPressed(FIRE_KEY)
 	val forceAim = keyPressed(FORCE_AIM_KEY)
-	val pressed = aim or forceAim
+	val sniperforceAim = keyPressed(SCD_AIM_KEY)
+	val pressed = aim or forceAim or sniperforceAim
 	var currentTarget = target.get()
 	
 	if (!pressed) {
@@ -134,7 +135,7 @@ internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boo
 			Thread.sleep(randLong(TARGET_SWAP_MIN_DELAY, TARGET_SWAP_MAX_DELAY))
 		}
 	} else if (currentTarget.onGround() && me.onGround()) {
-		val boneID = bone.get()
+		val boneID = if(sniperforceAim and weapon.sniper) SCD_AIM_BONE else bone.get()
 		val bonePosition = currentTarget.bones(boneID)
 		
 		val destinationAngle = calculateAngle(me, bonePosition)
