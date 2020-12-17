@@ -27,9 +27,7 @@ import com.charlatano.game.offsets.ClientOffsets.dwForceAttack
 import com.charlatano.scripts.aim.findTarget
 import com.charlatano.settings.*
 import com.charlatano.utils.*
-import org.jire.arrowhead.keyPressed
-import org.jire.arrowhead.keyReleased
-import java.awt.event.KeyEvent
+import org.jire.kna.set
 
 private val onBoneTriggerTarget = hook(1) {
 	if (ENABLE_BONE_TRIGGER && keyPressed(BONE_TRIGGER_KEY)){
