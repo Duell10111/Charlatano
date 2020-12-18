@@ -30,6 +30,7 @@ import com.charlatano.settings.RADAR
 import com.charlatano.settings.RADAR_TRIGGER_KEY
 import com.charlatano.settings.RADAR_TRIGGER_KEY_ENABLE
 import com.charlatano.utils.every
+import com.charlatano.utils.keyPressed
 import org.jire.kna.set
 
 internal fun radar() = every(1) {
