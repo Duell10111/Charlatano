@@ -18,15 +18,23 @@
 
 package com.charlatano.utils.extensions
 
-import com.sun.jna.Memory
+import com.sun.jna.Pointer
+import org.jire.kna.PointerCache
+import org.jire.kna.attach.windows.WindowsAttachedProcess
+import org.jire.kna.nativelib.windows.Kernel32
 
-fun Memory?.readable() = null != this
+fun WindowsAttachedProcess.readForced(address: Long, buffer: Pointer, size: Int) = Kernel32.ReadProcessMemory(
+	handle.pointer,
+	PointerCache[address],
+	buffer,
+	size,
+	0
+)
 
-fun Memory.byte(address: Long) = getByte(address)
-fun Memory.short(address: Long) = getShort(address)
-fun Memory.int(address: Long) = getInt(address)
-fun Memory.long(address: Long) = getLong(address)
-fun Memory.float(address: Long) = getFloat(address)
-fun Memory.double(address: Long) = getDouble(address)
-fun Memory.char(address: Long) = getChar(address)
-fun Memory.boolean(address: Long) = byte(address).toInt() != 0
+fun WindowsAttachedProcess.writeForced(address: Long, buffer: Pointer, size: Int) = Kernel32.WriteProcessMemory(
+	handle.pointer,
+	PointerCache[address],
+	buffer,
+	size,
+	0
+)
