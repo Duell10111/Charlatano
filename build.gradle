@@ -40,13 +40,12 @@ apply plugin: "application"
 apply plugin: "com.github.johnrengelman.shadow"
 
 group "com.charlatano"
-version "1.1.2"
+version "1.1.4"
 
 mainClassName = "com.charlatano.Charlatano"
 
 repositories {
 	jcenter()
-	maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -63,12 +62,9 @@ dependencies {
 	implementation "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
 	
 	implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version
-	implementation group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: kotlin_version
-	implementation group: 'org.jetbrains.kotlin', name: 'kotlin-script-runtime', version: kotlin_version
-	implementation group: 'org.jetbrains.kotlin', name: 'kotlin-script-util', version: kotlin_version
-	implementation group: 'org.jetbrains.kotlin', name: 'kotlin-compiler-embeddable', version: kotlin_version
-	implementation group: 'org.jetbrains.kotlin', name: 'kotlin-scripting-compiler-embeddable', version: kotlin_version
-	implementation group: 'org.jetbrains.kotlin', name: 'kotlin-main-kts', version: kotlin_version
+	implementation group: 'org.jetbrains.kotlin', name: 'kotlin-scripting-common', version: kotlin_version
+	implementation group: 'org.jetbrains.kotlin', name: 'kotlin-scripting-jvm', version: kotlin_version
+	implementation group: 'org.jetbrains.kotlin', name: 'kotlin-scripting-jvm-host', version: kotlin_version
 	
 	implementation group: 'it.unimi.dsi', name: 'fastutil', version: '8.4.4'
 }
