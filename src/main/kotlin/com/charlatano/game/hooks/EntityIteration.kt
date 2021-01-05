@@ -34,8 +34,8 @@ import com.charlatano.utils.every
 import com.charlatano.utils.extensions.uint
 import com.charlatano.utils.extensions.writeForced
 import com.charlatano.utils.notInGame
-import com.sun.jna.Memory
 import com.sun.jna.platform.win32.WinNT
+import org.jire.kna.Pointer
 import org.jire.kna.int
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.properties.Delegates
@@ -52,7 +52,7 @@ private fun reset() {
 	lastCleanup.set(System.currentTimeMillis())
 }
 
-private val writeGlowMemory = ThreadLocal.withInitial { Memory(1).apply { setByte(0, 0xEB.toByte()) } }
+private val writeGlowMemory = ThreadLocal.withInitial { Pointer.alloc(1).apply { setByte(0, 0xEB.toByte()) } }
 
 // Credits to Mr.Noad
 private var state by Delegates.observable(SignOnState.MAIN_MENU) { _, old, new ->
@@ -70,7 +70,10 @@ private var state by Delegates.observable(SignOnState.MAIN_MENU) { _, old, new -
 		}
 	}
 }
+
+@Volatile
 var cursorEnable = false
+
 private val cursorEnableAddress by lazy(LazyThreadSafetyMode.NONE) { clientDLL.address + ClientOffsets.dwMouseEnable }
 private val cursorEnablePtr by lazy(LazyThreadSafetyMode.NONE) { clientDLL.address + ClientOffsets.dwMouseEnablePtr }
 
@@ -93,6 +96,7 @@ fun constructEntities() = every(512) {
 	for (glowIndex in 0..glowObjectCount) {
 		val glowAddress = glowObject + (glowIndex * GLOW_OBJECT_SIZE)
 		val entity = csgoEXE.uint(glowAddress)
+		if (entity == 0L) continue
 		val type = EntityType.byEntityAddress(entity)
 		
 		if (type == EntityType.CFists) {

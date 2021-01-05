@@ -26,6 +26,7 @@ import com.charlatano.utils.*
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicLong
+import kotlin.math.max
 
 val target = AtomicLong(-1)
 val bone = AtomicInteger(HEAD_BONE)
@@ -121,7 +122,7 @@ internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boo
 	val position = me.position()
 	if (currentTarget < 0) {
 		currentTarget = findTarget(position, currentAngle, aim, yawOnly = true)
-		if (currentTarget < 0) {
+		if (currentTarget <= 0) {
 			return@every
 		}
 		target.set(currentTarget)
@@ -141,6 +142,6 @@ internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boo
 		if (AIM_ASSIST_MODE) destinationAngle.finalize(currentAngle, AIM_ASSIST_STRICTNESS / 100.0)
 		
 		val aimSpeed = AIM_SPEED_MIN + randInt(AIM_SPEED_MAX - AIM_SPEED_MIN)
-		doAim(destinationAngle, currentAngle, aimSpeed)
+		doAim(destinationAngle, currentAngle, aimSpeed / max(1, CACHE_EXPIRE_MILLIS.toInt() / 4))
 	}
 }
